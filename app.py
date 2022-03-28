@@ -18,6 +18,7 @@ def help():
     Returns: A string describing what paths to use for each function.
     '''
     return '''\nFIRST LOAD DATA USING THE FOLLOWING PATH: /load -X POST\n
+    IF THERE ARE ERROR LOAD THE DATA ONCE MORE\n\n
     Navigation:\n
     Use the following routes to access the data:
       1.  /epochs
@@ -72,7 +73,7 @@ def get_epochs():
     Returns: a string of epoch dictionaries. An error if data is not found.
     """
     try:
-        logging.info("Loading epochs...")
+        logging.info("Getting list of epochs...")
         epochs = ""
         for i in range(len(iss_positions['ndm']['oem']['body']['segment']['data']['stateVector'])):
             epochs = epochs + iss_positions['ndm']['oem']['body']['segment']['data']['stateVector'][i]['EPOCH'] + '\n'
@@ -90,16 +91,15 @@ def get_epoch(epoch: str):
     Returns: A dictionary for an epoch that mathces the value. An error is returned if there is no match.
     '''
     try:
-         iEpoch = 0
-         for i in range(len(iss_positions['ndm']['oem']['body']['segment']['data']['stateVector'])):
-             if epoch == iss_positions['ndm']['oem']['body']['segment']['data']['stateVector'][i]['EPOCH']:
-                 iEpoch = i
-                 break
-         xyz = ['X', 'Y', 'Z', 'X_DOT', 'Y_DOT', 'Z_DOT']
-         epoch_dict = {}
-         for j in xyz:
-             epoch_dict[j] = iss_positions['ndm']['oem']['body']['segment']['data']['stateVector'][iEpoch][j]
-         return epoch_dict
+        logging.info("Loading data for the following epoch /"+epoch)
+        xyz = ['X', 'Y', 'Z', 'X_DOT', 'Y_DOT', 'Z_DOT']
+        epoch_data = {}
+        for i in range(len(iss_positions['ndm']['oem']['body']['segment']['data']['stateVector'])):
+            if epoch == iss_positions['ndm']['oem']['body']['segment']['data']['stateVector'][i]['EPOCH']:
+                break
+            for j in xyz:
+                epoch_data[j] = iss_positions['ndm']['oem']['body']['segment']['data']['stateVector'][i][j]
+            return epoch_data
     except Exception as e:
         logging.error(e)
         return error_string
@@ -113,15 +113,17 @@ def list_countries():
              An error if data is not found.
     """
     try:
-        logging.info("Obtaining list of countries...")
+        logging.info("Getting list of countries with sightings...")
         countries = {}
+        j=0
         for i in range(len(iss_sightings['visible_passes']['visible_pass'])):
             iCountry = iss_sightings['visible_passes']['visible_pass'][i]['country']
             if iCountry in countries:
                 countries[iCountry] += 1
             else:
+                j+=1
                 countries[iCountry] = 1
-                return countries
+        return f'\n --Sightings per Country--\n\n' + json.dumps(countries, indent=2) + f'\n\n There are {j} countries with sightings found\n\n'
     except Exception as e:
         logging.error(e)
         return error_string
@@ -134,17 +136,22 @@ def country_data(country):
     Parameters: <country> (str): a country name as a string variable
     Returns: A list that matches the value. An error is returned if there is no match.
     """
-		
+
     try:
-		country_data = []
-		for sighting in iss_sightings:
-			if sighting['country'] == country.title():
-				country_data.append(sighting)
-		logging.debug('Get specific country queried')
-		return jsonify(country_data)
-	except Exception as e:
-		logging.error(e)
-		return error_string
+        logging.info("Getting data for the following country: /"+country)
+        countries = []
+        country_list = ['region', 'city', 'spacecraft', 'sighting_date','duration_minutes','max_elevation','enters','exits','utc_offset','utc_time', 'utc_date']
+        for i in range(len(iss_sightings['visible_passes']['visible_pass'])):
+            iCountry = iss_sightings['visible_passes']['visible_pass'][i]['country']
+            if country == iCountry:
+                country_data = {}
+                for j in country_list:
+                    country_data[j] = iss_sightings['visible_passes']['visible_pass'][i][j]
+                countries.append(country_data)
+        return json.dumps(countries, indent=2) + '\n\n'
+    except Exception as e:
+        logging.error(e)
+        return error_string
 
 @app.route('/countries/<country>/regions',methods=['GET'])
 def list_regions(country):
@@ -155,8 +162,9 @@ def list_regions(country):
     Returns: A dictionary of regions that mathces the value. An error is returned if there is no match.
     """
     try:
-        logging.info("Obtaining list of regions in the following country: /"+country)
+        logging.info("Getting list of regions in the following country: /"+country)
         regions = {}
+        j = 0
         for i in range(len(iss_sightings['visible_passes']['visible_pass'])):
             iCountry = iss_sightings['visible_passes']['visible_pass'][i]['country']
             if country == iCountry:
@@ -165,13 +173,14 @@ def list_regions(country):
                     regions[iRegion] += 1
                 else:
                     regions[iRegion] = 1
-        return regions
+                    j+=1
+        return '\n--Sightings per Region--\n\n' + json.dumps(regions, indent=2) + f'\n\n There are {j} regions with sightings in {country}\n\n'
     except Exception as e:
         logging.error(e)
         return error_string
 
 @app.route('/countries/<country>/regions/<region>',methods=['GET'])
-def region_data(country, region):
+def region_data(country: str, region: str) -> str:
     """
     Reads the data in the global variable iss_sightings to create a dictionary for a specific region
 
@@ -180,19 +189,16 @@ def region_data(country, region):
     Returns: A dictionary for a region that mathces the <region> value. An error is returned if there is no match.
     """
     try:
-        logging.info("Obtaining data for the following region: /"+region)
-        dictList = []
-        regionData = ['city', 'spacecraft', 'sighting_date','duration_minutes','max_elevation','enters','exits','utc_offset','utc_time', 'utc_date']
-        for i in range(len(iss_sightings['visible_passes']['visible_pass'])):
-            iCountry = iss_sightings['visible_passes']['visible_pass'][i]['country']
-            if country == iCountry:
-                iRegion = iss_sightings['visible_passes']['visible_pass'][i]['region']
-                if regions == iRegion:
-                    dRegion = {}
-                    for j in regionData:
-                        dRegion[j] = iss_sightings['visible_passes']['visible_pass'][i][j]
-                    dictList.append(dRegion)
-        return json.dumps(dictList, indent=2)
+        logging.info("Getting data for the following region: /"+region)
+        region_data_dictionary  = {}
+        country_data_dictionary = json.loads(country_data(country))
+        region_list = []
+        for i in country_data_dictionary:
+            if (region == i['region']):
+                del i["region"]
+                region_list.append(i)
+        region_data_dictionary[f'{region}'] = region_list
+        return (json.dumps(region_data_dictionary,indent=2) + '\n\n')
     except Exception as e:
         logging.error(e)
         return error_string
@@ -207,19 +213,15 @@ def list_cities(country, region):
     Returns: A list of cities in a region that mathces the <region> value. An error is returned if there is no match.
     """
     try:
-        logging.info("Obtaining list of cities in the following region: /"+region)
-        cities = {}
-        for i in range(len(iss_sightings['visible_passes']['visible_pass'])):
-            iCountry = iss_sightings['visible_passes']['visible_pass'][i]['country']
-            if country == iCountry:
-                iRegion = iss_sightings['visible_passes']['visible_pass'][i]['region']
-                if regions == iRegion:
-                    iCities = iss_sightings['visible_passes']['visible_pass'][i]['city']
-                    if iCities in cities:
-                        cities[iCities] +=1
-                    else:
-                        cities[iCities]=1
-        return cities
+        logging.info("Getting list of cities in the following region: /"+region)
+        cities_data_dictionary = {}
+        j = 0
+        region_data_dictionary = json.loads(region_data(country, region))
+        for i in region_data_dictionary[f'{region}']:
+            if i['city'] not in cities_data_dictionary.values():
+                    j += 1
+            cities_data_dictionary[f'city {j}'] = i[f'city']
+        return '\n--Cities with Sightings--\n\n' + (json.dumps(cities_data_dictionary, indent=2) + f'\n\n There are {j} cities with sightings in {region}\n\n')
     except Exception as e:
         logging.error(e)
         return error_string
@@ -235,22 +237,18 @@ def city_data(country, region, city):
     Returns: A dictionary for a city that mathces the <city> value. An error is returned if there is no match.
     """
     try:
-        logging.info("Obtaining data for the following city: /"+city)
-        dictList = []
-        cityData = ['spacecraft', 'sighting_date','duration_minutes','max_elevation','enters',\
-    'exits','utc_offset','utc_time', 'utc_date']
-        for i in range(len(iss_sightings['visible_passes']['visible_pass'])):
-            iCountry = iss_sightings['visible_passes']['visible_pass'][i]['country']
-            if country == iCountry:
-                iRegion = iss_sightings['visible_passes']['visible_pass'][i]['region']
-                if regions == iRegion:
-                    iCity = iss_sightings['visible_passes']['visible_pass'][i]['city']
-                    if cities == iCity:
-                        dCity = {}
-                        for j in cityData:
-                            dCity[j] = iss_sightings['visible_passes']['visible_pass'][i][j]
-                        dictList.append(dCity)
-        return json.dumps(dictList, indent=2)
+        logging.info('Getting data for the following city: /'+city)
+        city_data_dictionary  = {}
+        region_data_dictionary = json.loads(region_data(country, region))
+        city_list = []
+        j=0
+        for i in region_data_dictionary[f'{region}']:
+            if (city == i['city']):
+                del i['city']
+                city_list.append(i)
+                j+=1
+        city_data_dictionary[f'{city}'] = city_list
+        return (json.dumps(city_data_dictionary,indent=2) + f'\n\n{j} sightings found in {city} \n\n')
     except Exception as e:
         logging.error(e)
         return error_string
