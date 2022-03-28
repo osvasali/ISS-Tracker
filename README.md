@@ -187,14 +187,49 @@ The list above may be much longer.
 #### `/epochs/<epoch>` data for specific epoch
 
 ```
-$ curl localhost:<your port number>/load -X POST
+$ curl localhost:<your port number>/epochs/<epoch>
 ```
- 
-Output below is confirmation that the functions in app.py can now use the XML data:
+Example:
 
 ```
-Data has been loaded
+$ curl localhost:5027/epochs/2022-057T11:32:56.869Z
 ```
+
+Output below is the data associated with one epoch:
+
+```
+{
+  "X": {
+    "#text": "-4945.2048874258298",
+    "@units": "km"
+  },
+  "X_DOT": {
+    "#text": "1.19203952554952",
+    "@units": "km/s"
+  },
+  "Y": {
+    "#text": "-3625.9704508659102",
+    "@units": "km"
+  },
+  "Y_DOT": {
+    "#text": "-5.67286420497775",
+    "@units": "km/s"
+  },
+  "Z": {
+    "#text": "-2944.7433487186099",
+    "@units": "km"
+  },
+  "Z_DOT": {
+    "#text": "4.99593211898374",
+    "@units": "km/s"
+  }
+}
+```
+
+The position is represented in kilometers and cartesian coordinates with the X, Y and Z keys. 
+The velocity in X, Y, and Z directions is represented in kilometer per second by X_DOT, Y_DOT, and Z_DOT, respectively.
+
+
 
 #### `/countries` - lists all countries
 
