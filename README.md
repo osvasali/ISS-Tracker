@@ -77,10 +77,10 @@ $ docker run --name "iss-tracker" -d -p <your port number>:5000 osvasali/iss-tra
 ## How to Interact with the Application
 
 The following is a template of how to interact with the application replacing  `<your port number>` with the port number you are using and
-'<url_route>' with the one of the routes shown in this section.
+`<route>` with the one of the routes shown in this section.
 
 ```
-$ curl localhost:<your port number>/<url_route>
+$ curl localhost:<your port number>/<route>
 ```
 
 #### /help - shows list of routes
