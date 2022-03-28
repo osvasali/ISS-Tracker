@@ -76,6 +76,8 @@ $ docker run --name "iss-tracker" -d -p <your port number>:5000 osvasali/iss-tra
 
 ## How to Interact with the Application
 
+This section details how to interact with the application and interpret the results.
+
 The following is a template of how to interact with the application replacing  `<your port number>` with the port number you are using and
 `<route>` with the one of the routes shown in this section.
 
@@ -234,25 +236,79 @@ The velocity in X, Y, and Z directions is represented in kilometer per second by
 #### `/countries` - lists all countries
 
 ```
-$ curl localhost:<your port number>/load -X POST
+$ curl localhost:<your port number>/countries
 ```
  
-Output below is confirmation that the functions in app.py can now use the XML data:
+This route outputs a list of every country in the XML file and the number of sightings in each country:
 
 ```
-Data has been loaded
+ --Sightings per Country--
+
+{
+  "United_States": 4857
+}
+
+ There are 1 countries with sightings found
 ```
+In the example above, there are 4857 sightings in the United States
+
 
 #### `/countries/<country>` - data for specific country
 
 ```
-$ curl localhost:<your port number>/load -X POST
+$ curl localhost:<your port number>/countries/<country>
+```
+
+Example:
+```
+$ curl localhost:5027/countries/United_States
 ```
  
-Output below is confirmation that the functions in app.py can now use the XML data:
+Output below :
 
 ```
-Data has been loaded
+[
+  {
+    "region": "Massachusetts",
+    "city": "Natick",
+    "spacecraft": "ISS",
+    "sighting_date": "Thu Feb 17/05:41 AM",
+    "duration_minutes": "5",
+    "max_elevation": "19",
+    "enters": "10 above S",
+    "exits": "10 above E",
+    "utc_offset": "-5.0",
+    "utc_time": "10:41",
+    "utc_date": "Feb 17, 2022"
+  },
+...
+  {
+    "region": "New_Jersey",
+    "city": "Green_Creek",
+    "spacecraft": "ISS",
+    "sighting_date": "Fri Feb 25/05:42 AM",
+    "duration_minutes": "3",
+    "max_elevation": "13",
+    "enters": "11 above NW",
+    "exits": "10 above NNE",
+    "utc_offset": "-5.0",
+    "utc_time": "10:42",
+    "utc_date": "Feb 25, 2022"
+  },
+  {
+    "region": "New_Jersey",
+    "city": "Green_Creek",
+    "spacecraft": "ISS",
+    "sighting_date": "Sat Feb 26/04:56 AM",
+    "duration_minutes": "2",
+    "max_elevation": "16",
+    "enters": "16 above N",
+    "exits": "10 above NNE",
+    "utc_offset": "-5.0",
+    "utc_time": "09:56",
+    "utc_date": "Feb 26, 2022"
+  }
+]
 ```
 
 #### `/countries/<country>/regions` - lists all regions
