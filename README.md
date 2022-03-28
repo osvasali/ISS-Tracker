@@ -264,7 +264,7 @@ Example:
 $ curl localhost:5027/countries/United_States
 ```
  
-Output below :
+Output below is shorter that the actual output and has a break marked with an ellipsis `...`:
 
 ```
 [
@@ -310,11 +310,12 @@ Output below :
   }
 ]
 ```
+This route shows you all the sightings in the given country and all the data associated with each sighting (region, city, max_elevation, utc date, and so on)
 
 #### `/countries/<country>/regions` - lists all regions
 
 ```
-$ curl localhost:<your port number>/load -X POST
+$ curl localhost:<your port number>/countries/<country>/regions
 ```
  
 Output below is confirmation that the functions in app.py can now use the XML data:
