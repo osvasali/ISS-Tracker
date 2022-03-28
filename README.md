@@ -20,7 +20,7 @@ The XML files above come from NASA's official website found [here](https://data.
 
 ### Get files
 
-#####Clone the contents of this repository by entering what follows the $ into a terminal or SCP client:
+##### Clone the contents of this repository by entering what follows the $ into a terminal or SCP client:
 
 ```
 $ git clone https://github.com/osvasali/ISS-Tracker
@@ -34,7 +34,7 @@ $ git clone https://github.com/osvasali/ISS-Tracker
     - ```ISS.OEM_J2K_EPH.xml```: Titled "Public Distribution"
     - ```XMLsightingData_citiesUSA06.xml```: Titled "XMLsightingData_citiesUSA06"
 
-#####Download the files by entering what follows the $ into a terminal or SCP client:
+##### Download the files by entering what follows the $ into a terminal or SCP client:
 
 ```
 $ wget https://nasa-public-data.s3.amazonaws.com/iss-coords/2022-02-13/ISS_OEM/ISS.OEM_J2K_EPH.xml
