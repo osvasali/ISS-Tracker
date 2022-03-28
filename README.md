@@ -184,7 +184,7 @@ Sample output of epoch names:
 ...
 ```
 
-The list above may be much longer.
+The list above may be much longer and is only an excerpt marked with breaks `...`.
 
 #### `/epochs/<epoch>` data for specific epoch
 
