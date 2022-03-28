@@ -83,7 +83,7 @@ The following is a template of how to interact with the application replacing  `
 $ curl localhost:<your port number>/<route>
 ```
 
-#### /help - shows list of routes
+#### `/help` - shows list of routes
 
 ```
 $ curl localhost:<your port number>/help
@@ -120,7 +120,7 @@ FIRST LOAD DATA USING THE FOLLOWING PATH: /load -X POST
 
 ```
 
-#### /load - loads data from XML files
+#### `/load` - loads data from XML files
 
 ```
 $ curl localhost:<your port number>/load -X POST
@@ -141,7 +141,7 @@ The following output is an error message that appears when '-X POST' is accident
 <p>The method is not allowed for the requested URL.</p>
 ````
 
-#### /epochs - lists all epochs
+#### `/epochs` - lists all epochs
 
 ```
 $ curl localhost:<your port number>/epochs
@@ -184,7 +184,7 @@ Sample output of epoch names:
 
 The list above may be much longer.
 
-#### /epochs/<epoch> data for specific epoch
+#### `/epochs/<epoch>` data for specific epoch
 
 ```
 $ curl localhost:<your port number>/load -X POST
@@ -196,7 +196,7 @@ Output below is confirmation that the functions in app.py can now use the XML da
 Data has been loaded
 ```
 
-#### /countries - lists all countries
+#### `/countries` - lists all countries
 
 ```
 $ curl localhost:<your port number>/load -X POST
@@ -208,7 +208,7 @@ Output below is confirmation that the functions in app.py can now use the XML da
 Data has been loaded
 ```
 
-#### /countries/<country> - data for specific country
+#### `/countries/<country>` - data for specific country
 
 ```
 $ curl localhost:<your port number>/load -X POST
@@ -220,7 +220,7 @@ Output below is confirmation that the functions in app.py can now use the XML da
 Data has been loaded
 ```
 
-#### /countries/<country>/regions - lists all regions
+#### `/countries/<country>/regions` - lists all regions
 
 ```
 $ curl localhost:<your port number>/load -X POST
@@ -232,7 +232,7 @@ Output below is confirmation that the functions in app.py can now use the XML da
 Data has been loaded
 ```
 
-#### /countries/<country>/regions/<regions> - data for specific region
+#### `/countries/<country>/regions/<region>` - data for specific region
 
 ```
 $ curl localhost:<your port number>/load -X POST
@@ -244,7 +244,7 @@ Output below is confirmation that the functions in app.py can now use the XML da
 Data has been loaded
 ```
 
-#### / ---- - loads data from XML files
+#### `/countries/<country>/regions/<regions>/cities` - lists all cities
 
 ```
 $ curl localhost:<your port number>/load -X POST
@@ -256,19 +256,7 @@ Output below is confirmation that the functions in app.py can now use the XML da
 Data has been loaded
 ```
 
-#### /countries/<country>/regions/<regions>/cities - lists all cities
-
-```
-$ curl localhost:<your port number>/load -X POST
-```
- 
-Output below is confirmation that the functions in app.py can now use the XML data:
-
-```
-Data has been loaded
-```
-
-#### /countries/<country>/regions/<regions>/cities/<cities> - data for specific city
+#### `/countries/<country>/regions/<regions>/cities/<cities>` - data for specific city
 
 ```
 $ curl localhost:<your port number>/load -X POST
