@@ -19,7 +19,8 @@ position in cartesian coordinates, units of velocity, magnitude of velocity, and
 The XML files above come from NASA's official website found [here](https://data.nasa.gov/Space-Science/ISS_COORDS_2022-02-13/r6u8-bhhq).
 
 ### Get files
-Clone the contents of this repository by entering what follows the $ into a terminal or SCP client:
+
+#####Clone the contents of this repository by entering what follows the $ into a terminal or SCP client:
 
 ```
 $ git clone https://github.com/osvasali/ISS-Tracker
@@ -28,14 +29,15 @@ $ git clone https://github.com/osvasali/ISS-Tracker
 (other methods for cloning a repository are described here [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository))
 
 #### XML file download
-- Required data files: `ISS.OEM_J2K_EPH.xml` and `XMLsightingData_citiesUSA06.xml` (a description of these files is available in the [Data Files](#data-files) section)
+- Required data files: `ISS.OEM_J2K_EPH.xml` and `XMLsightingData_citiesUSA06.xml`
 - Download the data [here](https://data.nasa.gov/Space-Science/ISS_COORDS_2022-02-13/r6u8-bhhq)
     - ```ISS.OEM_J2K_EPH.xml```: Titled "Public Distribution"
     - ```XMLsightingData_citiesUSA06.xml```: Titled "XMLsightingData_citiesUSA06"
--Download the files by entering what follows the $ into a terminal or SCP client:
+
+#####Download the files by entering what follows the $ into a terminal or SCP client:
 
 ```
 $ wget https://nasa-public-data.s3.amazonaws.com/iss-coords/2022-02-13/ISS_OEM/ISS.OEM_J2K_EPH.xml
 $ wget https://nasa-public-data.s3.amazonaws.com/iss-coords/2022-02-13/ISS_sightings/XMLsightingData_citiesUSA06.xml
-
 ```
+
