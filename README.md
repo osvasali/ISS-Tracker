@@ -111,11 +111,11 @@ FIRST LOAD DATA USING THE FOLLOWING PATH: /load -X POST
           #data for specific country
       5.  /countries/<country>/regions
           #lists all regions
-      6.  /countries/<country>/regions/<regions>
+      6.  /countries/<country>/regions/<region>
           #data for specific region
-      7.  /countries/<country>/regions/<regions>/cities
+      7.  /countries/<country>/regions/<region>/cities
           #lists all cities
-      8. /countries/<country>/regions/<regions>/cities/<cities>
+      8. /countries/<country>/regions/<region>/cities/<cities>
           #data for specific city
 
 ```
@@ -244,7 +244,7 @@ Output below is confirmation that the functions in app.py can now use the XML da
 Data has been loaded
 ```
 
-#### `/countries/<country>/regions/<regions>/cities` - lists all cities
+#### `/countries/<country>/regions/<region>/cities` - lists all cities
 
 ```
 $ curl localhost:<your port number>/load -X POST
@@ -256,7 +256,7 @@ Output below is confirmation that the functions in app.py can now use the XML da
 Data has been loaded
 ```
 
-#### `/countries/<country>/regions/<regions>/cities/<cities>` - data for specific city
+#### `/countries/<country>/regions/<region>/cities/<cities>` - data for specific city
 
 ```
 $ curl localhost:<your port number>/load -X POST
