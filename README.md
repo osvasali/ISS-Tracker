@@ -45,8 +45,8 @@ $ wget https://nasa-public-data.s3.amazonaws.com/iss-coords/2022-02-13/ISS_sight
 ## Build Containerized App
 
 The image may built by using either the Dockerfile or Makefile in this repository.
-Replace '<username>' and '<tag>' with your own username and tag.
-You may replace '<your port number>' with 5027 or another port not in use
+Replace `<username>` and `<tag>` with your own username and tag.
+You may replace `<your port number>` with 5027 or another port not in use
 
 ### Using Makefile
 #### Enter the following to pull and run a pre-containerized copy of the app
@@ -76,7 +76,7 @@ $ docker run --name "iss-tracker" -d -p <your port number>:5000 osvasali/iss-tra
 
 ## How to Interact with the Application
 
-The following is a template of how to interact with the application replacing '<your port number>' with the port number you are using and
+The following is a template of how to interact with the application replacing  `<your port number>` with the port number you are using and
 '<url_route>' with the one of the routes shown in this section.
 
 ```
