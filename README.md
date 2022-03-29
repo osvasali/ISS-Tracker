@@ -317,6 +317,11 @@ This route shows you all the sightings in the given country and all the data ass
 ```
 $ curl localhost:<your port number>/countries/<country>/regions
 ```
+
+Example:
+```
+$ curl localhost:5027/countries/United_States/regions
+```
  
 Output below is confirmation that the functions in app.py can now use the XML data:
 
@@ -327,7 +332,12 @@ Data has been loaded
 #### `/countries/<country>/regions/<region>` - data for specific region
 
 ```
-$ curl localhost:<your port number>/load -X POST
+$ curl localhost:<your port number>/countries/<country>/regions/<region>
+```
+
+Example:
+```
+$ curl localhost:5027/countries/United_States/regions/Nevada
 ```
  
 Output below is confirmation that the functions in app.py can now use the XML data:
@@ -339,7 +349,12 @@ Data has been loaded
 #### `/countries/<country>/regions/<region>/cities` - lists all cities
 
 ```
-$ curl localhost:<your port number>/load -X POST
+$ curl localhost:<your port number>/countries/<country>/regions/<region>/cities
+```
+
+Example:
+```
+$ curl localhost:5027/countries/United_States/regions/Nevada/cities
 ```
  
 Output below is confirmation that the functions in app.py can now use the XML data:
@@ -351,7 +366,12 @@ Data has been loaded
 #### `/countries/<country>/regions/<region>/cities/<cities>` - data for specific city
 
 ```
-$ curl localhost:<your port number>/load -X POST
+$ curl localhost:<your port number>/countries/<country>/regions/<region>/cities
+```
+
+Example:
+```
+$ curl localhost:5027/countries/United_States/regions/Nevada/cities/Reno
 ```
  
 Output below is confirmation that the functions in app.py can now use the XML data:
