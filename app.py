@@ -31,11 +31,11 @@ def help() -> str:
           #data for specific country
       5.  /countries/<country>/regions
           #lists all regions
-      6.  /countries/<country>/regions/<regions>
+      6.  /countries/<country>/regions/<region>
           #data for specific region
-      7.  /countries/<country>/regions/<regions>/cities
+      7.  /countries/<country>/regions/<region>/cities
           #lists all cities
-      8. /countries/<country>/regions/<regions>/cities/<cities>
+      8. /countries/<country>/regions/<region>/cities/<cities>
           #data for specific city\n\n'''
 
 @app.route('/load', methods=['POST'])
