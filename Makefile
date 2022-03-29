@@ -16,3 +16,9 @@ run:
 
 pull:
         docker pull ${NAME}/iss-tracker:midterm1
+        
+positions: 
+        wget https://nasa-public-data.s3.amazonaws.com/iss-coords/2022-02-13/ISS_OEM/ISS.OEM_J2K_EPH.xml
+        
+sightings:
+        wget https://nasa-public-data.s3.amazonaws.com/iss-coords/2022-02-13/ISS_sightings/XMLsightingData_citiesUSA06.xml
