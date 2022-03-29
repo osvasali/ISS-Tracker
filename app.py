@@ -11,7 +11,7 @@ iss_sightings = {}
 error_string = "ERROR - DATA NOT FOUND - Use /help for more information\n"
 
 @app.route('/help', methods=['GET'])
-def help():
+def help() -> str:
     '''
     Information on how to interact with the application
 
@@ -39,7 +39,7 @@ def help():
           #data for specific city\n\n'''
 
 @app.route('/load', methods=['POST'])
-def load():
+def load() -> str:
     """
     Loads the ISS position and sightings data into global variables.
 
@@ -66,11 +66,11 @@ def load():
     return f'Data has been loaded\n'
 
 @app.route('/epochs', methods=['GET'])
-def get_epochs():
+def get_epochs() -> List[str]:
     """
     Reads the data in the global variable iss_positions to create a new dictionary of epochs.
 
-    Returns: a string of epoch dictionaries. An error if data is not found.
+    Returns: a list of epoch names as string variables. An error if data is not found.
     """
     try:
         logging.info("Getting list of epochs...")
@@ -83,7 +83,7 @@ def get_epochs():
         return error_string
 
 @app.route('/epochs/<epoch>', methods=['GET'])
-def get_epoch(epoch: str):
+def get_epoch(epoch: str) -> dict:
     '''
     Reads the data in the global variable iss_positions to create a dictionary for a specific epoch
 
@@ -105,11 +105,11 @@ def get_epoch(epoch: str):
         return error_string
 
 @app.route('/countries',methods=['GET'])
-def list_countries():
+def list_countries() -> str:
     """
     Reads the data in the global variable iss_sightings to create a new dictionary of countries.
 
-    Returns: A dictionary of country dictionaries where each dictionary is the country the ISS was sighted in.
+    Returns: A string that includes a dictionary of country dictionaries where each dictionary is the country the ISS was sighted in.
              An error if data is not found.
     """
     try:
@@ -129,12 +129,12 @@ def list_countries():
         return error_string
 
 @app.route('/countries/<country>', methods=['GET'])
-def country_data(country):
+def country_data(country) -> str:
     """
     Reads the data in the global variable iss_sightings to create a dictionary for a specific country
 
     Parameters: <country> (str): a country name as a string variable
-    Returns: A list that matches the value. An error is returned if there is no match.
+    Returns: A string shows dictionaries that match the <country> (str) value. An error is returned if there is no match.
     """
 
     try:
@@ -154,12 +154,12 @@ def country_data(country):
         return error_string
 
 @app.route('/countries/<country>/regions',methods=['GET'])
-def list_regions(country):
+def list_regions(country) -> str:
     """
     Reads the data in the global variable iss_sightings to create a dictionary of regions
 
     Parameters: <country> (str): a country name as a string variable
-    Returns: A dictionary of regions that mathces the value. An error is returned if there is no match.
+    Returns: A string with dictionary of regions that mathces the <country> (str) value. An error is returned if there is no match.
     """
     try:
         logging.info("Getting list of regions in the following country: /"+country)
@@ -186,7 +186,7 @@ def region_data(country: str, region: str) -> str:
 
     Parameters: <country> (str): a country name as a string variable
                 <region> (str): a region name as a string variable
-    Returns: A dictionary for a region that mathces the <region> value. An error is returned if there is no match.
+    Returns: A atring with a dictionary for a region that mathces the <country> (str) and <region> (str) value. An error is returned if there is no match.
     """
     try:
         logging.info("Getting data for the following region: /"+region)
