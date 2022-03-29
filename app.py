@@ -186,7 +186,7 @@ def region_data(country: str, region: str) -> str:
 
     Parameters: <country> (str): a country name as a string variable
                 <region> (str): a region name as a string variable
-    Returns: A atring with a dictionary for a region that mathces the <country> (str) and <region> (str) value. An error is returned if there is no match.
+    Returns: A atring with a dictionary for a region that mathces the <country> (str) and <region> (str) values. An error is returned if there is no match.
     """
     try:
         logging.info("Getting data for the following region: /"+region)
@@ -204,13 +204,13 @@ def region_data(country: str, region: str) -> str:
         return error_string
 
 @app.route('/countries/<country>/regions/<region>/cities',methods=['GET'])
-def list_cities(country, region):
+def list_cities(country: str, region: str) -> str:
     """
     Reads the data in the global variable iss_sightings to create a dictionary of cities in a specific region
 
     Parameters: <country> (str): a country name as a string variable
                 <region> (str): a region name as a string variable
-    Returns: A list of cities in a region that mathces the <region> value. An error is returned if there is no match.
+    Returns: A string with a list of cities in a region that matches the <country> (str) and <region> (str) values. An error is returned if there is no match.
     """
     try:
         logging.info("Getting list of cities in the following region: /"+region)
@@ -227,14 +227,14 @@ def list_cities(country, region):
         return error_string
 
 @app.route('/countries/<country>/regions/<region>/cities/<city>',methods=['GET'])
-def city_data(country, region, city):
+def city_data(country: str, region: str, city: str) -> str:
     """
     Reads the data in the global variable iss_sightings to create a dictionary to create a dictionary for a specific city
 
     Parameters: <country> (str): a country name as a string variable
                 <region> (str): a region name as a string variable
                 <city> (str): a city name as a string variable
-    Returns: A dictionary for a city that mathces the <city> value. An error is returned if there is no match.
+    Returns: A string version of a dictionary for a city that mathces the <country> (str), <region> (str), and <city> (str) values. An error is returned if there is no match.
     """
     try:
         logging.info('Getting data for the following city: /'+city)
