@@ -62,7 +62,19 @@ $ NAME="<username>" make run
 ```
 
 ### Using Dockerfile
-#### Enter the following pull and run a pre-containerized copy of the app
+
+#### Make requirements.txt - enter the following
+
+```
+$ emacs requirements.txt
+```
+Next type `Flask==2.0.3` then enter the following commands to save and exit the file.
+
+1. `ctrl X` or `cmd X`
+2. `ctrl S` or `cmd S`
+3. `ctrl Z` or `cmd Z`
+
+#### Enter the following to pull and run a pre-containerized copy of the app
 
 ```
 $ docker pull osvasali/iss-tracker:midterm1
