@@ -323,10 +323,25 @@ Example:
 $ curl localhost:5027/countries/United_States/regions
 ```
  
-Output below is confirmation that the functions in app.py can now use the XML data:
+Output below is:
 
 ```
-Data has been loaded
+--Sightings per Region--
+
+{
+  "Massachusetts": 447,
+  "Michigan": 1870,
+  "Minnesota": 545,
+  "Mississippi": 216,
+  "Missouri": 541,
+  "Montana": 235,
+  "Nebraska": 311,
+  "Nevada": 133,
+  "New_Hampshire": 310,
+  "New_Jersey": 249
+}
+
+ There are 10 regions with sightings in United_States
 ```
 
 #### `/countries/<country>/regions/<region>` - data for specific region
@@ -340,10 +355,50 @@ Example:
 $ curl localhost:5027/countries/United_States/regions/Nevada
 ```
  
-Output below is confirmation that the functions in app.py can now use the XML data:
+Output below is:
 
 ```
-Data has been loaded
+{
+  "Nevada": [
+    {
+      "city": "Carson_City",
+      "spacecraft": "ISS",
+      "sighting_date": "Thu Feb 17/05:46 AM",
+      "duration_minutes": "6",
+      "max_elevation": "24",
+      "enters": "10 above S",
+      "exits": "10 above ENE",
+      "utc_offset": "-8.0",
+      "utc_time": "13:46",
+      "utc_date": "Feb 17, 2022"
+    },
+    {
+      "city": "Carson_City",
+      "spacecraft": "ISS",
+      "sighting_date": "Fri Feb 18/04:59 AM",
+      "duration_minutes": "4",
+      "max_elevation": "14",
+      "enters": "10 above SSE",
+      "exits": "10 above E",
+      "utc_offset": "-8.0",
+      "utc_time": "12:59",
+      "utc_date": "Feb 18, 2022"
+    },
+    ...
+    {
+      "city": "Winnemucca",
+      "spacecraft": "ISS",
+      "sighting_date": "Fri Feb 25/05:48 AM",
+      "duration_minutes": "4",
+      "max_elevation": "16",
+      "enters": "10 above NW",
+      "exits": "10 above NNE",
+      "utc_offset": "-8.0",
+      "utc_time": "13:48",
+      "utc_date": "Feb 25, 2022"
+    }
+  ]
+}
 ```
 
 #### `/countries/<country>/regions/<region>/cities` - lists all cities
@@ -357,10 +412,26 @@ Example:
 $ curl localhost:5027/countries/United_States/regions/Nevada/cities
 ```
  
-Output below is confirmation that the functions in app.py can now use the XML data:
+Output below is:
 
 ```
-Data has been loaded
+--Cities with Sightings--
+
+{
+  "city 1": "Carson_City",
+  "city 2": "Elko",
+  "city 3": "Ely",
+  "city 4": "Fallon",
+  "city 5": "Great_Basin_National_Park",
+  "city 6": "Las_Vegas",
+  "city 7": "Mesquite",
+  "city 8": "Reno",
+  "city 9": "Silver_Springs",
+  "city 10": "Tonopah",
+  "city 11": "Winnemucca"
+}
+
+ There are 11 cities with sightings in Nevada
 ```
 
 #### `/countries/<country>/regions/<region>/cities/<cities>` - data for specific city
@@ -377,5 +448,33 @@ $ curl localhost:5027/countries/United_States/regions/Nevada/cities/Reno
 Output below is confirmation that the functions in app.py can now use the XML data:
 
 ```
-Data has been loaded
+{
+  "Reno": [
+    {
+      "spacecraft": "ISS",
+      "sighting_date": "Thu Feb 17/05:46 AM",
+      "duration_minutes": "5",
+      "max_elevation": "23",
+      "enters": "10 above S",
+      "exits": "10 above ENE",
+      "utc_offset": "-8.0",
+      "utc_time": "13:46",
+      "utc_date": "Feb 17, 2022"
+    },
+    ...
+    {
+      "spacecraft": "ISS",
+      "sighting_date": "Fri Feb 25/05:48 AM",
+      "duration_minutes": "3",
+      "max_elevation": "13",
+      "enters": "10 above NW",
+      "exits": "10 above NNE",
+      "utc_offset": "-8.0",
+      "utc_time": "13:48",
+      "utc_date": "Feb 25, 2022"
+    }
+  ]
+}
+
+12 sightings found in Reno
 ```
