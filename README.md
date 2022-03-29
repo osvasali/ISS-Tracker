@@ -1,4 +1,4 @@
-# ISS Tracker - Positions and Sightings
+# International Space Station Tracker - Positions and Sightings
 
 This application outputs data for the position and velocity of the International Space Station (ISS), as well as the places around the world where the ISS was sighted.
 The application does this by collecting data from XML files and making them easier for a person to read the country, region, city, time, 
