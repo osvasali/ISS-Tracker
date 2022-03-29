@@ -323,7 +323,7 @@ Example:
 $ curl localhost:5027/countries/United_States/regions
 ```
  
-Output below is:
+Output below is a list of every region in the given country:
 
 ```
 --Sightings per Region--
@@ -344,6 +344,9 @@ Output below is:
  There are 10 regions with sightings in United_States
 ```
 
+The number to the right of each key is the number of sightings in that region, For example Nevada has 133 ISS sightings. The last line of the output explains the amount of regions with sightings found in the give country.
+
+
 #### `/countries/<country>/regions/<region>` - data for specific region
 
 ```
@@ -355,7 +358,7 @@ Example:
 $ curl localhost:5027/countries/United_States/regions/Nevada
 ```
  
-Output below is:
+Output below is shorter that the actual output and has a break marked with an ellipsis `...`:
 
 ```
 {
@@ -400,6 +403,7 @@ Output below is:
   ]
 }
 ```
+This route shows you all the sightings in the given country and region and all the data associated with each sighting (city, max_elevation, utc date, and so on)
 
 #### `/countries/<country>/regions/<region>/cities` - lists all cities
 
@@ -412,7 +416,7 @@ Example:
 $ curl localhost:5027/countries/United_States/regions/Nevada/cities
 ```
  
-Output below is:
+Output below is a list of cities with sightings within a given country and region:
 
 ```
 --Cities with Sightings--
@@ -433,6 +437,8 @@ Output below is:
 
  There are 11 cities with sightings in Nevada
 ```
+The last row in the string notes how many cities with sightings there are in the given region.
+
 
 #### `/countries/<country>/regions/<region>/cities/<cities>` - data for specific city
 
@@ -445,7 +451,7 @@ Example:
 $ curl localhost:5027/countries/United_States/regions/Nevada/cities/Reno
 ```
  
-Output below is confirmation that the functions in app.py can now use the XML data:
+Output below is shorter that the actual output and has a break marked with an ellipsis `...`:
 
 ```
 {
@@ -478,3 +484,4 @@ Output below is confirmation that the functions in app.py can now use the XML da
 
 12 sightings found in Reno
 ```
+This route shows you all the sightings in the given country, region, and city and all the data associated with each sighting (max_elevation, utc date, duration, and so on)
